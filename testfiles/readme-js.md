@@ -4,15 +4,17 @@
 
 ### Inputs
 
-| Name         | Description  | Default | Required |
-| ------------ | ------------ | ------- | -------- |
-| who-to-greet | Who to greet | World   | true     |
+| Name | Description | Default | Required |
+|------|-------------|---------|----------|
+| who-to-greet | Who to greet | World | true |
+
 
 ### Outputs
 
-| Name | Description             | Value |
-| ---- | ----------------------- | ----- |
+| Name | Description | Value |
+|------|-------------|-------|
 | time | The time we greeted you | <nil> |
+
 
 ### Outputs
 
