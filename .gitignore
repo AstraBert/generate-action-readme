@@ -1,2 +1,5 @@
 # binary directory
 bin/
+
+# modules
+node_modules/

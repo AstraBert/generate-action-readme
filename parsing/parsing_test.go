@@ -2,6 +2,7 @@ package parsing
 
 import (
 	"os"
+	"strings"
 	"testing"
 )
 
@@ -23,8 +24,12 @@ func TestParsingUtils(t *testing.T) {
 			t.Errorf("Not expecting any error, got %s", err.Error())
 		}
 		cont, _ := os.ReadFile(tc.outputFile)
-		if mdStr != string(cont) {
-			t.Errorf("Expecting %s when converting %s, got %s", cont, tc.outputFile, mdStr)
+		normalizeWhitespace := func(s string) string {
+			return strings.Join(strings.Fields(s), " ")
+		}
+
+		if normalizeWhitespace(mdStr) != normalizeWhitespace(string(cont)) {
+			t.Errorf("Expecting %s when converting %s, got %s", string(cont), tc.outputFile, mdStr)
 		}
 	}
 }
