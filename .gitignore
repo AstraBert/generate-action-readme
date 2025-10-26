@@ -3,3 +3,6 @@ bin/
 
 # modules
 node_modules/
+
+# env file
+.env
