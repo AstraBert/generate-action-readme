@@ -20,7 +20,9 @@ jobs:
           go-version: "1.24"
     
       - name: Set up golangci
-        run: curl -sfL https://install.goreleaser.com/github.com/golangci/golangci-lint.sh | sh
+        uses: golangci/golangci-lint-action@v8
+        with:
+          version: latest
 
       - name: Format
         run: make format
