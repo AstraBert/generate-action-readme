@@ -1,0 +1,38 @@
+{
+  "name": "@cle-does-things/gar",
+  "version": "0.1.0",
+  "description": "CLI tool to generate a README for GitHub Actions.",
+  "main": "index.js",
+  "scripts": {
+    "postinstall": "golang-npm install",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AstraBert/generate-action-readme.git"
+  },
+  "keywords": [
+    "cli",
+    "documentation",
+    "go",
+    "vibe-coding",
+    "agents",
+    "cursor",
+    "claude-code",
+    "gemini-cli"
+  ],
+  "author": "Clelia Astra Bertelli",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/AstraBert/generate-action-readme/issues"
+  },
+  "homepage": "https://github.com/AstraBert/generate-action-readme#readme",
+  "dependencies": {
+    "golang-npm": "^0.0.6"
+  },
+  "goBinary": {
+    "name": "anydocs",
+    "path": "./bin",
+    "url": "https://github.com/AstraBert/generate-action-readme/releases/download/v{{version}}/gar_{{version}}_{{platform}}_{{arch}}.tar.gz"
+  }
+}
