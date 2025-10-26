@@ -6,7 +6,7 @@
 
 In order to install `gar` there are three ways:
 
-1. Using `go`: if you already have `go` 1.23+ installed in your environment, installing `gar` is effortless
+1. Using `go`: if you already have `go` 1.22+ installed in your environment, installing `gar` is effortless
 
 ```bash
 go install github.com/AstraBert/generate-action-readme
@@ -15,16 +15,16 @@ go install github.com/AstraBert/generate-action-readme
 2. Using `npm` (recommended):
 
 ```bash
-npm install @cle-does-things/anydocs
+npm install @cle-does-things/gar
 ```
 
 3. Downloading the executable from the [releases page](https://github.com/AstraBert/generate-action-readme/releases): you can download it directly from the GitHub repository or, if you do not want to leave your terminal, you can use `curl`:
 
 ```bash
-curl -L -o anydocs https://github.com/AstraBert/generate-action-readme/releases/download/<version>/gar_<version>_<OS>_<processor>.tar.gz ## e.g. https://github.com/AstraBert/generate-action-readme/releases/download/0.1.1/gar_0.1.1_darwin_amd64.tar.gz
+curl -L -o gar https://github.com/AstraBert/generate-action-readme/releases/download/<version>/generate-action-readme_<version>_<OS>_<processor>.tar.gz ## e.g. https://github.com/AstraBert/generate-action-readme/releases/download/0.1.1/generate-action-readme_0.1.1_darwin_amd64.tar.gz
 
 # make sure the downloaded binary is executable (not needed for Windows)
-chmod +x anydocs
+chmod +x gar
 ```
 
 In this last case, be careful to specify your OS (supported: linux, windows, macos) and your processor type (supported: amd, arm).
