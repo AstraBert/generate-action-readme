@@ -3,7 +3,9 @@ package parsing
 import (
 	"errors"
 	"fmt"
+	"maps"
 	"os"
+	"slices"
 	"strings"
 
 	"go.yaml.in/yaml/v4"
@@ -41,17 +43,55 @@ type GhAction struct {
 	Outputs     map[string]GhActionOutput
 }
 
+func (gha GhAction) StringifyNils() GhAction {
+	g := gha
+	if g.Description == nil {
+		s := ""
+		g.Description = &s
+	}
+	if len(g.Inputs) > 0 {
+		for k, val := range g.Inputs {
+			v := val
+			if v.Description == nil {
+				v.Description = "no description"
+			}
+			if v.Default == nil {
+				v.Default = "no default"
+			}
+			if v.Required == nil {
+				v.Required = false
+			}
+			g.Inputs[k] = v
+		}
+	}
+	if len(g.Outputs) > 0 {
+		for k, val := range g.Outputs {
+			v := val
+			if v.Description == nil {
+				v.Description = "no description"
+			}
+			if v.Value == nil {
+				v.Value = "no value"
+			}
+			g.Outputs[k] = v
+		}
+	}
+	return g
+}
+
 func (g GhAction) ToMarkdownString() string {
 	header := "# " + g.Name
-	if g.Description != nil {
+	if g.Description != nil && *g.Description != "" {
 		header = fmt.Sprintf("# %s\n\n## %s\n\n", g.Name, *g.Description)
 	}
 	if len(g.Inputs) > 0 {
 		header += "### Inputs\n\n"
 		header += "| Name | Description | Default | Required |\n"
 		header += "|------|-------------|---------|----------|\n"
-		for k, v := range g.Inputs {
-			header += fmt.Sprintf("| %s | %v | %v | %v |\n", k, v.Description, v.Default, v.Required)
+		sortedKeys := slices.Sorted(maps.Keys(g.Inputs))
+		for _, k := range sortedKeys {
+			v := g.Inputs[k]
+			header += fmt.Sprintf("| `%s` | %v | `%v` | %v |\n", k, v.Description, v.Default, v.Required)
 		}
 	} else {
 		header += "### Inputs\n\nNo inputs\n\n"
@@ -60,8 +100,10 @@ func (g GhAction) ToMarkdownString() string {
 		header += "\n\n### Outputs\n\n"
 		header += "| Name | Description | Value |\n"
 		header += "|------|-------------|-------|\n"
-		for k, v := range g.Outputs {
-			header += fmt.Sprintf("| %s | %v | %v |\n", k, v.Description, v.Value)
+		sortedKeys := slices.Sorted(maps.Keys(g.Outputs))
+		for _, k := range sortedKeys {
+			v := g.Outputs[k]
+			header += fmt.Sprintf("| `%s` | %v | `%v` |\n", k, v.Description, v.Value)
 		}
 	} else {
 		header += "\n\n### Outputs\n\nNo outputs"
@@ -71,7 +113,7 @@ func (g GhAction) ToMarkdownString() string {
 		header += "\n\n## Steps\n\n- "
 		header += strings.Join(g.Steps, "\n- ")
 	} else {
-		header += "\n\n### Outputs\n\nThis action has no reported steps <!-- presumably a JavaScript action -->"
+		header += "\n\n### Steps\n\nThis action has no reported steps <!-- presumably a JavaScript action -->"
 	}
 	return header
 }
@@ -177,5 +219,6 @@ func ParseActionData(data map[string]any) (string, error) {
 		}
 		action.Steps = stepNames
 	}
-	return action.ToMarkdownString(), nil
+	correctedAction := action.StringifyNils()
+	return correctedAction.ToMarkdownString(), nil
 }
