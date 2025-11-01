@@ -6,7 +6,7 @@
 
 In order to install `gar` there are three ways:
 
-1. Using `go`: if you already have `go` 1.22+ installed in your environment, installing `gar` is effortless
+1. Using `go`: if you already have `go` 1.23+ installed in your environment, installing `gar` is effortless
 
 ```bash
 go install github.com/AstraBert/generate-action-readme

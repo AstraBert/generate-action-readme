@@ -6,16 +6,16 @@
 
 | Name | Description | Default | Required |
 |------|-------------|---------|----------|
-| who-to-greet | Who to greet | World | true |
+| `who-to-greet` | Who to greet | `World` | true |
 
 
 ### Outputs
 
 | Name | Description | Value |
 |------|-------------|-------|
-| time | The time we greeted you | <nil> |
+| `time` | The time we greeted you | `no value` |
 
 
-### Outputs
+### Steps
 
 This action has no reported steps <!-- presumably a JavaScript action -->

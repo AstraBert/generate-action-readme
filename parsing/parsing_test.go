@@ -13,6 +13,7 @@ func TestParsingUtils(t *testing.T) {
 	}{
 		{"../testfiles/action-composite.yml", "../testfiles/readme-composite.md"},
 		{"../testfiles/action-js.yml", "../testfiles/readme-js.md"},
+		{"../testfiles/action-multi-args.yml", "../testfiles/readme-multi-args.md"},
 	}
 	for _, tc := range testCases {
 		dt, err := ParseYml(tc.inputFile)
